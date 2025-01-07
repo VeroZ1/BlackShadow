@@ -1,6 +1,7 @@
 package com.wind.meditor.core;
 
 import com.wind.meditor.property.ModificationProperty;
+import com.wind.meditor.utils.FileTypeUtils;
 import com.wind.meditor.utils.Log;
 import com.wind.meditor.utils.Utils;
 
@@ -31,7 +32,7 @@ public class FileProcessor {
             for (Enumeration entries = zipFile.entries(); entries.hasMoreElements(); ) {
                 ZipEntry entry = (ZipEntry) entries.nextElement();
                 String zipEntryName = entry.getName();
-                if (zipEntryName.startsWith("META-INF")) {
+                if (FileTypeUtils.isSignatureFile(zipEntryName)) {
                     continue;
                 }
                 InputStream zipInputStream = null;
